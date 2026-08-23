@@ -2,6 +2,16 @@
 
 Plain HTML/CSS/JS, single file (`index.html`), no build step, no dependencies (one Google Fonts link for the display typeface).
 
+## v8 tweak (2026-08-23, same day) — functional quote request form
+The "Request a Quote" contact form previously just showed a placeholder `alert()`. It's now wired to submit to [Formspree](https://formspree.io) (free tier: 50 submissions/month, unlimited forms, confirmed AJAX/JSON support — compared against Getform, which rebranded to "Forminit" in Jan 2026 and caps the free tier at 1 form).
+
+- Added `name` attributes to every field (`name`, `company`, `email`, `message`) — required for Formspree (or any form backend) to capture field data.
+- Form now has `id="quoteForm"` and `action="https://formspree.io/f/YOUR_FORM_ID"` — **`YOUR_FORM_ID` is a placeholder that must be replaced with your real Formspree endpoint before this goes live** (see walkthrough below).
+- Added a hidden honeypot field (`_gotcha`) — a lightweight, invisible spam trap Formspree recognizes automatically; real visitors never see or fill it.
+- Submission now happens via `fetch()` (AJAX) instead of a page reload/redirect — keeps the same in-page, no-jarring-navigation feel as the rest of the site.
+- Added an inline success/error status message styled to match the dark contact section (same checkmark icon language used in the value strip), with the submit button showing a "Sending…" state and re-enabling itself afterward.
+- If the placeholder `YOUR_FORM_ID` hasn't been replaced yet, submitting shows a friendly inline warning instead of silently failing — so this is safe to deploy as-is and finish connecting whenever the endpoint is ready.
+
 ## v7 tweak (2026-08-23, same day) — final headline
 User asked for 5 fresh headline hooks (separate from the earlier 4). Picked: **"Never wonder where your parts are again."** — leads with the customer's pain point rather than announcing a feature. Subhead unchanged (still complements it without repeating wording).
 
@@ -52,7 +62,7 @@ Changes:
   These are not connected to any real data — they exist to show prospects what the real dashboard will look like once a route is live.
 
 ## Known placeholders to replace before sharing with real prospects
-- Contact form (`#contact`) shows an alert instead of submitting anywhere — wire it to [Formspree](https://formspree.io) or [Getform](https://getform.io) (both have a free tier and need no backend). Deliberately left as-is this round per user request to finalize design first.
+- Contact form (`#contact`) is wired to Formspree but still has a placeholder endpoint (`action="https://formspree.io/f/YOUR_FORM_ID"`) — create a free Formspree account/form and paste your real endpoint URL in (see v8 note above and the walkthrough sent alongside this file).
 - Footer email (`hello@routedparts.com`) — swap for the real inbox once set up.
 - Founder bio / About section is minimal — fill in once ready.
 
