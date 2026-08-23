@@ -1,6 +1,18 @@
 # Routed — Website
 
-Plain HTML/CSS/JS, single file (`index.html`), no build step, no dependencies (one Google Fonts link for the display typeface).
+Plain HTML/CSS/JS, single file (`index.html`), no build step, no dependencies (one Google Fonts link for the display typeface). One extra image file (`og-image.png`) supports link previews — see v10 below.
+
+## v10 tweak (2026-08-23, same day) — link-preview (Open Graph) tags + preview image
+User noticed that texting routedparts.com showed a rough-looking preview title ("Routed --- Route-Based Parts & Freight Delivery"). The site previously had no Open Graph/Twitter Card tags at all, so link-preview generators (iMessage, WhatsApp, Slack, Facebook, LinkedIn, etc.) were falling back to guessing from the raw `<title>`/`<meta name="description">` tags — and some of those apps don't render the em dash (`—`) character cleanly, which is likely what turned into stray dashes.
+
+Fixes:
+- Replaced the em dash in `<title>` and the meta description with a plain pipe/comma-based structure that renders identically everywhere — no more special characters that a preview generator could mangle.
+- Added a full set of Open Graph (`og:title`, `og:description`, `og:image`, `og:url`, `og:type`, `og:site_name`) and Twitter Card (`twitter:card`, `twitter:title`, `twitter:description`, `twitter:image`) meta tags to `<head>`, so every platform gets an explicit, controlled title/description instead of guessing.
+- `og:title` uses the site's actual hook copy ("Routed | Never wonder where your parts are again.") rather than the more SEO-oriented `<title>` tag, since link-preview text is more effective when it's punchy.
+- Added `og-image.png` (1200×630, the standard link-preview image size) — a simple branded card with the Routed wordmark, pin mark, and headline on a dark background, generated to match the site's look. **Note**: it approximates the real logo using a system serif font rather than the exact Fraunces typeface, because the environment that generated this image doesn't have internet access to load Google Fonts — visually very close, but if you want a pixel-perfect match to the real logo, this image could be swapped later for a screenshot-based crop of the actual site.
+- Added a small inline SVG favicon (the blue location pin, no extra file needed) so browser tabs and bookmarks also show a Routed-branded icon instead of a blank page icon.
+
+**Deployment note**: `og-image.png` must be uploaded to the GitHub repo alongside `index.html` (same root folder) — the meta tags reference it at `https://routedparts.com/og-image.png`. If it's missing, previews will fall back to showing no image (title/description will still work fine).
 
 ## v9 tweak (2026-08-23, same day) — real Formspree endpoint connected
 User created their Formspree account/form and provided the real endpoint. `action="https://formspree.io/f/YOUR_FORM_ID"` was updated to `action="https://formspree.io/f/mjybzqow"` — the "Request a Quote" form is now fully live and will deliver submissions to the inbox connected to that Formspree form. No other changes.
