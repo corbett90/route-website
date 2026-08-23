@@ -34,7 +34,8 @@
     --ink:#1d1d1f;
     --ink-soft:#6e6e73;
     --accent:#2563eb;
-    --accent-soft:#8fb0f5;
+    --accent-soft:#90c9f4;
+    --accent-soft-rgb:144,201,244;
     --dark:#0b0c0e;
     --dark-ink:#f5f5f7;
     --dark-ink-soft:#a1a1a6;
@@ -76,15 +77,17 @@
   .btn-row{display:flex;gap:14px;flex-wrap:wrap;}
 
   /* Logo / wordmark — the ONE place a display serif is used, matching the supplied brand mark */
-  .logo{display:inline-flex;align-items:flex-end;gap:3px;}
+  .logo{display:inline-flex;align-items:flex-end;gap:4px;}
+  .logo-text{position:relative;display:inline-block;padding-bottom:7px;}
   .logo-word{
     font-family:'Fraunces', Georgia, serif;font-weight:900;
     font-size:22px;line-height:1;color:var(--accent);letter-spacing:-0.01em;
-    border-bottom:2px dashed var(--accent);padding-bottom:3px;
+    display:block;
   }
-  .logo-pin{width:14px;height:14px;flex:0 0 auto;color:var(--accent);margin-bottom:3px;}
-  footer .logo-word{font-size:27px;color:var(--dark-ink);border-bottom-color:var(--accent-soft);}
-  footer .logo-pin{width:17px;height:17px;color:var(--accent-soft);margin-bottom:4px;}
+  .logo-underline{position:absolute;left:0;bottom:0;width:100%;height:9px;color:var(--accent-soft);overflow:visible;}
+  .logo-pin{width:14px;height:14px;flex:0 0 auto;color:var(--accent-soft);margin-bottom:6px;}
+  footer .logo-word{font-size:27px;color:var(--dark-ink);}
+  footer .logo-pin{width:17px;height:17px;color:var(--accent-soft);margin-bottom:7px;}
 
   /* Nav */
   header{
@@ -124,15 +127,18 @@
   }
 
   /* Plain icons — no colored badge container */
-  .icon-plain{width:28px;height:28px;color:var(--accent);margin-bottom:16px;}
+  .icon-plain{width:38px;height:38px;color:var(--accent);margin-bottom:18px;}
 
-  /* Hero */
-  .hero{padding-top:132px;padding-bottom:96px;text-align:center;}
-  .hero h1{font-size:clamp(32px,5.2vw,58px);max-width:760px;margin-left:auto;margin-right:auto;}
-  .hero p.lead{font-size:18px;max-width:580px;margin:0 auto 34px;color:var(--dark-ink-soft);}
+  /* Hero — kept compact so the CTA and value strip land above the fold on typical laptop viewports */
+  .hero{padding-top:76px;padding-bottom:56px;text-align:center;position:relative;overflow:hidden;}
+  .hero-bg{position:absolute;inset:0;z-index:0;pointer-events:none;}
+  .hero-bg svg{width:100%;height:100%;display:block;}
+  .hero .wrap{position:relative;z-index:1;}
+  .hero h1{font-size:clamp(30px,4.6vw,50px);max-width:760px;margin-left:auto;margin-right:auto;}
+  .hero p.lead{font-size:17px;max-width:580px;margin:0 auto 24px;color:var(--dark-ink-soft);}
   .hero .btn-row{justify-content:center;}
 
-  .value-strip{max-width:820px;margin:48px auto 0;display:flex;flex-direction:column;gap:16px;}
+  .value-strip{max-width:820px;margin:32px auto 0;display:flex;flex-direction:column;gap:16px;}
   @media (min-width:700px){ .value-strip{flex-direction:row;justify-content:center;gap:0;} }
   .value-item{display:flex;align-items:center;justify-content:center;gap:10px;font-size:14px;font-weight:600;color:var(--dark-ink);}
   @media (min-width:700px){ .value-item{padding:0 30px;border-left:1px solid #2a2b2e;} .value-item:first-child{border-left:none;} }
@@ -149,46 +155,49 @@
   .dash-card{
     background:var(--bg-alt);border-radius:26px;padding:20px;
     box-shadow:0 30px 70px -30px rgba(0,0,0,0.25);
-    max-width:960px;margin:0 auto;text-align:left;border:1px solid var(--line);
+    max-width:960px;margin:0 auto;text-align:left;border:1px solid rgba(var(--accent-soft-rgb),0.35);
   }
   .dash-grid{display:grid;grid-template-columns:1fr;gap:16px;}
   @media (min-width:760px){ .dash-grid{grid-template-columns:1fr 260px;} }
   .map-frame{position:relative;border-radius:16px;overflow:hidden;background:#e9eef7;}
   .map-frame svg{width:100%;height:auto;display:block;}
 
-  .side-panel{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;flex-direction:column;}
+  .side-panel{background:var(--bg);border:1px solid rgba(var(--accent-soft-rgb),0.4);border-radius:16px;padding:16px;display:flex;flex-direction:column;}
   .side-panel .route-name{font-size:13px;font-weight:700;color:var(--ink);}
   .side-panel .live-tag{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font-size:11px;font-weight:700;color:#1f8a4c;}
   .side-panel .pulse{width:7px;height:7px;border-radius:50%;background:#1f8a4c;position:relative;}
   .side-panel .pulse::after{content:'';position:absolute;inset:-4px;border-radius:50%;background:#1f8a4c;opacity:0.4;animation:pulse 1.8s ease-out infinite;}
   @keyframes pulse{0%{transform:scale(0.6);opacity:0.5;}100%{transform:scale(2.2);opacity:0;}}
   @media (prefers-reduced-motion:reduce){ .side-panel .pulse::after{animation:none;} }
-  .eta-row{margin-top:14px;padding-top:14px;border-top:1px solid var(--line);}
+  .eta-row{margin-top:14px;padding-top:14px;border-top:1px solid rgba(var(--accent-soft-rgb),0.4);}
   .eta-row .eta-label{font-size:11px;text-transform:uppercase;letter-spacing:0.05em;color:var(--ink-soft);font-weight:700;margin-bottom:3px;}
   .eta-row .eta-value{font-size:14px;font-weight:700;}
   .eta-row .eta-time{font-size:12px;color:var(--ink-soft);}
   .po-list{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;}
-  .po-list li{font-size:12.5px;padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:var(--bg-alt);}
+  .po-list li{font-size:12.5px;padding:9px 10px;border:1px solid rgba(var(--accent-soft-rgb),0.45);border-radius:10px;background:rgba(var(--accent-soft-rgb),0.08);}
   .po-list .po-id{font-weight:700;color:var(--ink);display:block;}
   .po-list .po-dest{color:var(--ink-soft);}
-  .po-panel-label{font-size:11px;text-transform:uppercase;letter-spacing:0.05em;color:var(--ink-soft);font-weight:700;margin-top:14px;padding-top:14px;border-top:1px solid var(--line);}
+  .po-panel-label{font-size:11px;text-transform:uppercase;letter-spacing:0.05em;color:var(--ink-soft);font-weight:700;margin-top:14px;padding-top:14px;border-top:1px solid rgba(var(--accent-soft-rgb),0.4);}
 
-  /* How it works */
-  .steps{position:relative;padding-left:0;counter-reset:step;}
-  .steps::before{content:'';position:absolute;left:17px;top:8px;bottom:8px;width:2px;background:var(--line);}
-  .step{display:flex;gap:18px;padding:16px 0;position:relative;}
-  .step .num{position:relative;z-index:1;flex:0 0 auto;width:36px;height:36px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;counter-increment:step;}
-  .step .num::before{content:counter(step);}
+  /* How it works — each step number sits inside a map pin, connected by a dashed "route" line */
+  .steps{position:relative;padding-left:0;}
+  .steps::before{content:'';position:absolute;left:16px;top:17px;bottom:17px;width:0;border-left:2px dashed var(--accent-soft);}
+  .step{display:flex;gap:18px;padding:16px 0;position:relative;align-items:flex-start;}
+  .step-pin{position:relative;z-index:1;flex:0 0 auto;width:33px;height:33px;background:var(--bg);}
+  .alt .step-pin{background:var(--bg-alt);}
+  .step-pin path{fill:var(--accent);}
+  .step-pin text{fill:#fff;font-family:-apple-system, BlinkMacSystemFont, sans-serif;}
+  .step .body{padding-top:4px;}
   .step .body h3{margin-bottom:3px;font-size:17px;}
   .step .body p{margin:0;}
 
   /* POD demo — functional UI, keeps card treatment */
-  .pod-demo{background:var(--bg-alt);border:1px solid var(--line);border-radius:var(--radius);padding:26px;}
+  .pod-demo{background:var(--bg-alt);border:1px solid rgba(var(--accent-soft-rgb),0.35);border-radius:var(--radius);padding:26px;}
   .pod-search{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap;}
-  .pod-search input{flex:1;min-width:200px;padding:12px 16px;border-radius:999px;border:1px solid var(--line);font-size:14px;background:var(--bg);color:var(--ink);}
+  .pod-search input{flex:1;min-width:200px;padding:12px 16px;border-radius:999px;border:1px solid rgba(var(--accent-soft-rgb),0.5);font-size:14px;background:var(--bg);color:var(--ink);}
   .pod-search input:focus{outline:2px solid var(--accent);outline-offset:1px;}
   .pod-results{display:grid;gap:10px;}
-  .pod-row{display:grid;grid-template-columns:1fr;gap:6px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--bg);}
+  .pod-row{display:grid;grid-template-columns:1fr;gap:6px;padding:14px 16px;border:1px solid rgba(var(--accent-soft-rgb),0.4);border-radius:12px;background:rgba(var(--accent-soft-rgb),0.05);}
   @media (min-width:640px){ .pod-row{grid-template-columns:1fr 1fr 1fr auto;align-items:center;gap:10px;} }
   .pod-row .pod-po{font-weight:700;font-size:14px;}
   .pod-row .pod-meta{font-size:13px;color:var(--ink-soft);}
@@ -200,8 +209,8 @@
   .diff-grid{display:grid;grid-template-columns:1fr;gap:40px;margin-top:8px;}
   @media (min-width:700px){ .diff-grid{grid-template-columns:1fr 1fr;gap:44px 40px;} }
   @media (min-width:1000px){ .diff-grid{grid-template-columns:repeat(4,1fr);} }
-  .diff-item h3{font-size:18px;}
-  .diff-item p{font-size:14.5px;margin-bottom:0;}
+  .diff-item h3{font-size:22px;}
+  .diff-item p{font-size:16px;margin-bottom:0;}
 
   .spark-compare{margin-top:14px;}
   .spark-legend{display:flex;gap:16px;margin-top:8px;font-size:12px;flex-wrap:wrap;}
@@ -210,7 +219,8 @@
 
   /* Contact */
   .contact-form{display:grid;gap:14px;max-width:560px;margin:0 auto;}
-  .contact-form input, .contact-form textarea{width:100%;padding:14px 16px;border-radius:12px;border:1px solid #3a3b3f;background:#141517;color:var(--dark-ink);font-size:14px;font-family:inherit;}
+  .contact-form input, .contact-form textarea{width:100%;padding:14px 16px;border-radius:12px;border:1px solid rgba(var(--accent-soft-rgb),0.4);background:#141517;color:var(--dark-ink);font-size:14px;font-family:inherit;}
+  .contact-form input:focus, .contact-form textarea:focus{outline:none;border-color:var(--accent-soft);box-shadow:0 0 0 3px rgba(var(--accent-soft-rgb),0.2);}
   .contact-form input:disabled, .contact-form textarea:disabled{opacity:0.5;}
   .contact-form textarea{min-height:120px;resize:vertical;}
   .contact-form label{font-size:13px;color:var(--dark-ink-soft);margin-bottom:-6px;}
@@ -232,7 +242,11 @@
 
 <header>
   <nav class="wrap">
-    <a href="#top" class="logo"><span class="logo-word">Routed</span>
+    <a href="#top" class="logo">
+      <span class="logo-text">
+        <span class="logo-word">Routed</span>
+        <svg class="logo-underline" viewBox="0 0 100 12" preserveAspectRatio="none"><path d="M2,4 Q50,12 98,3" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="1 7"/></svg>
+      </span>
       <svg class="logo-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12a7 7 0 1 0-14 0c0 4.42 7 12 7 12Z"/><circle cx="12" cy="9" r="2.3"/></svg>
     </a>
     <div class="navlinks">
@@ -246,6 +260,31 @@
 </header>
 
 <section id="top" class="dark hero">
+  <div class="hero-bg" aria-hidden="true">
+    <svg viewBox="0 0 1440 800" preserveAspectRatio="xMidYMin slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="heroGlow" cx="80%" cy="6%" r="65%">
+          <stop offset="0%" stop-color="#2563eb" stop-opacity="0.35"/>
+          <stop offset="70%" stop-color="#2563eb" stop-opacity="0"/>
+        </radialGradient>
+        <filter id="heroDotGlow" x="-60%" y="-60%" width="220%" height="220%">
+          <feGaussianBlur stdDeviation="4" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <rect width="1440" height="800" fill="url(#heroGlow)"/>
+      <path d="M -100,70 C 280,150 560,10 860,90 S 1300,20 1580,80"
+        fill="none" stroke="#90c9f4" stroke-width="2.5" stroke-dasharray="1 12" stroke-linecap="round" opacity="0.45"/>
+      <circle cx="280" cy="150" r="4" fill="#90c9f4" opacity="0.5"/>
+      <circle cx="860" cy="90" r="4" fill="#90c9f4" opacity="0.5"/>
+      <g filter="url(#heroDotGlow)">
+        <circle r="5" fill="#90c9f4">
+          <animateMotion id="heroMotion" dur="16s" repeatCount="indefinite"
+            path="M -100,70 C 280,150 560,10 860,90 S 1300,20 1580,80"/>
+        </circle>
+      </g>
+    </svg>
+  </div>
   <div class="wrap">
     <h1 class="reveal">Never wonder where your parts are again.</h1>
     <p class="lead reveal">Contracted, store-to-store parts delivery for Georgia retail chains — proof on every drop, and pricing built around accuracy.</p>
@@ -257,50 +296,6 @@
       <div class="value-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg><span>Fixed-route reliability, every run</span></div>
       <div class="value-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg><span>Full accountability on every drop</span></div>
       <div class="value-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg><span>Performance-based contracts, built around accuracy</span></div>
-    </div>
-  </div>
-</section>
-
-<section id="problem">
-  <div class="wrap">
-    <div class="editorial reveal">
-      <div class="editorial-item">
-        <span class="eyebrow">The Problem</span>
-        <h3>Inter-store transfers are usually an afterthought.</h3>
-        <p>Whoever's free drives it — a manager's car, an ad-hoc courier, a route that only sort-of runs on schedule. No visibility, no accountability.</p>
-      </div>
-      <div class="editorial-item">
-        <span class="eyebrow">The Solution</span>
-        <h3>A dedicated fleet, run on your route, your schedule.</h3>
-        <p>Routed contracts directly with you to run fixed routes between your stores — live tracking, proof of delivery, and performance-based pricing built around accuracy, all in from day one. Every route runs on a dedicated vehicle with AI-optimized scheduling, so it's consistent every time.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="how-it-works" class="alt">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow">How It Works</div>
-      <h2>From contract to delivered, in four steps.</h2>
-    </div>
-    <div class="steps reveal">
-      <div class="step">
-        <div class="num"></div>
-        <div class="body"><h3>Route &amp; contract setup</h3><p>We map your stores and frequency, and agree on a performance-based rate.</p></div>
-      </div>
-      <div class="step">
-        <div class="num"></div>
-        <div class="body"><h3>Scheduled pickup</h3><p>A dedicated vehicle arrives on your route's fixed schedule, every time.</p></div>
-      </div>
-      <div class="step">
-        <div class="num"></div>
-        <div class="body"><h3>Live delivery</h3><p>Track the vehicle and what's loaded on it in real time as it runs the route.</p></div>
-      </div>
-      <div class="step">
-        <div class="num"></div>
-        <div class="body"><h3>Proof &amp; reporting</h3><p>Every drop is logged and timestamped — look it up anytime.</p></div>
-      </div>
     </div>
   </div>
 </section>
@@ -380,31 +375,64 @@
   </div>
 </section>
 
+<section id="proof" class="alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Proof of Delivery</div>
+      <h2>Every drop, logged and searchable.</h2>
+      <p>Every drop is timestamped and logged the moment it's signed for. Look up any delivery by PO number or store — no more "did that ever arrive?" phone calls.</p>
+    </div>
+    <div class="reveal">
+      <div class="demo-badge" style="margin-left:0;"><span class="dot"></span> Sample data — illustrative preview</div>
+      <div class="pod-demo">
+        <div class="pod-search">
+          <input type="text" id="podSearch" placeholder="Search by PO number or store name (try “402” or “48220”)" autocomplete="off">
+          <button class="btn btn-primary" style="padding:12px 22px;" onclick="filterPod()">Search</button>
+        </div>
+        <div class="pod-results" id="podResults"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how-it-works">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">How It Works</div>
+      <h2>From contract to delivered, in four steps.</h2>
+    </div>
+    <div class="steps reveal">
+      <div class="step">
+        <svg class="step-pin" viewBox="0 0 24 24"><path d="M12 22s8-8.58 8-13.5A8 8 0 1 0 4 8.5C4 13.42 12 22 12 22Z"/><text x="12" y="11.5" text-anchor="middle" font-size="9.5" font-weight="700">1</text></svg>
+        <div class="body"><h3>Route &amp; contract setup</h3><p>We map your stores and frequency, and agree on a performance-based rate.</p></div>
+      </div>
+      <div class="step">
+        <svg class="step-pin" viewBox="0 0 24 24"><path d="M12 22s8-8.58 8-13.5A8 8 0 1 0 4 8.5C4 13.42 12 22 12 22Z"/><text x="12" y="11.5" text-anchor="middle" font-size="9.5" font-weight="700">2</text></svg>
+        <div class="body"><h3>Scheduled pickup</h3><p>A dedicated vehicle arrives on your route's fixed schedule, every time.</p></div>
+      </div>
+      <div class="step">
+        <svg class="step-pin" viewBox="0 0 24 24"><path d="M12 22s8-8.58 8-13.5A8 8 0 1 0 4 8.5C4 13.42 12 22 12 22Z"/><text x="12" y="11.5" text-anchor="middle" font-size="9.5" font-weight="700">3</text></svg>
+        <div class="body"><h3>Live delivery</h3><p>Track the vehicle and what's loaded on it in real time as it runs the route.</p></div>
+      </div>
+      <div class="step">
+        <svg class="step-pin" viewBox="0 0 24 24"><path d="M12 22s8-8.58 8-13.5A8 8 0 1 0 4 8.5C4 13.42 12 22 12 22Z"/><text x="12" y="11.5" text-anchor="middle" font-size="9.5" font-weight="700">4</text></svg>
+        <div class="body"><h3>Proof &amp; reporting</h3><p>Every drop is logged and timestamped — look it up anytime.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="capabilities" class="alt">
   <div class="wrap">
     <div class="section-head reveal">
       <div class="eyebrow">What Sets Routed Apart</div>
       <h2>Built for accountability, not just delivery.</h2>
     </div>
-
-    <div class="reveal" style="margin-bottom:18px;">
-      <div class="demo-badge"><span class="dot"></span> Sample data — illustrative preview</div>
-      <h3 style="font-size:20px;">Proof of delivery, searchable anytime</h3>
-      <p>Every drop is timestamped and logged. Look up any delivery by PO number or store — no more "did that ever arrive?" phone calls.</p>
-    </div>
-    <div class="pod-demo reveal" style="margin-bottom:56px;">
-      <div class="pod-search">
-        <input type="text" id="podSearch" placeholder="Search by PO number or store name (try “402” or “48220”)" autocomplete="off">
-        <button class="btn btn-primary" style="padding:12px 22px;" onclick="filterPod()">Search</button>
-      </div>
-      <div class="pod-results" id="podResults"></div>
-    </div>
-
     <div class="diff-grid reveal">
       <div class="diff-item">
         <svg class="icon-plain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/></svg>
         <h3>Performance-based contracts</h3>
-        <p>Pricing tied to on-time and accuracy — not a flat rate regardless of how the route runs.</p>
+        <p>Pricing tied to delivery accuracy — not a flat rate regardless of how the route runs.</p>
       </div>
       <div class="diff-item">
         <svg class="icon-plain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="19" r="2"/><circle cx="12" cy="6" r="2"/><circle cx="19" cy="17" r="2"/><path d="M5 19 12 6M12 6 19 17"/></svg>
@@ -417,8 +445,8 @@
         <p>Your rate is set at signing and holds — regardless of fuel costs or route conditions later.</p>
         <div class="spark-compare">
           <svg viewBox="0 0 200 46" width="100%" height="46">
-            <path d="M0,32 L28,14 L56,40 L84,10 L112,34 L140,16 L168,38 L196,20" stroke="#c9ccd1" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M0,20 L196,20" stroke="#2563eb" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <path d="M0,18 L28,6 L56,26 L84,4 L112,22 L140,8 L168,30 L196,14" stroke="#c9ccd1" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M0,38 L196,38" stroke="#2563eb" stroke-width="3" fill="none" stroke-linecap="round"/>
           </svg>
           <div class="spark-legend">
             <span><i style="background:#c9ccd1;"></i>Typical fuel-linked pricing</span>
@@ -435,18 +463,20 @@
   </div>
 </section>
 
-<section id="about">
+<section id="problem">
   <div class="wrap">
     <div class="editorial reveal">
       <div class="editorial-item">
-        <span class="eyebrow">About Routed</span>
-        <h3>A Marietta-based fleet, built for Georgia retail.</h3>
-        <p>Routed (Tend To Solutions LLC) runs a dedicated delivery fleet for fixed-route parts and freight transfers between multi-location retail chains across Georgia. No passengers, no ride-hailing — just reliable, tracked, on-schedule delivery between your stores.</p>
+        <svg class="icon-plain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><path d="M12 16h.01"/></svg>
+        <span class="eyebrow">The Problem</span>
+        <h3>Inter-store transfers are usually an afterthought.</h3>
+        <p>Whoever's free drives it — a manager's car, an ad-hoc courier, a route that only sort-of runs on schedule. No visibility, no accountability.</p>
       </div>
       <div class="editorial-item">
-        <span class="eyebrow">Built Around Consistency</span>
-        <h3>Every contract, the same reliable setup.</h3>
-        <p>Every contract gets a dedicated vehicle and a fixed schedule — and every rate is locked in at signing, regardless of fuel costs or route conditions down the line.</p>
+        <svg class="icon-plain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9"/></svg>
+        <span class="eyebrow">The Solution</span>
+        <h3>A dedicated fleet, run on your route, your schedule.</h3>
+        <p>Routed contracts directly with you to run fixed routes between your stores — live tracking, proof of delivery, and performance-based pricing built around accuracy, all in from day one. Every route runs on a dedicated vehicle with AI-optimized scheduling, so it's consistent every time.</p>
       </div>
     </div>
   </div>
@@ -475,10 +505,31 @@
   </div>
 </section>
 
+<section id="about" class="alt">
+  <div class="wrap">
+    <div class="editorial reveal">
+      <div class="editorial-item">
+        <span class="eyebrow">About Routed</span>
+        <h3>A Marietta-based fleet, built for Georgia retail.</h3>
+        <p>Routed (Tend To Solutions LLC) runs a dedicated delivery fleet for fixed-route parts and freight transfers between multi-location retail chains across Georgia. No passengers, no ride-hailing — just reliable, tracked, on-schedule delivery between your stores.</p>
+      </div>
+      <div class="editorial-item">
+        <span class="eyebrow">Built Around Consistency</span>
+        <h3>Every contract, the same reliable setup.</h3>
+        <p>Every contract gets a dedicated vehicle and a fixed schedule — and every rate is locked in at signing, regardless of fuel costs or route conditions down the line.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="wrap">
     <div class="foot-grid">
-      <a href="#top" class="logo"><span class="logo-word">Routed</span>
+      <a href="#top" class="logo">
+        <span class="logo-text">
+          <span class="logo-word">Routed</span>
+          <svg class="logo-underline" viewBox="0 0 100 12" preserveAspectRatio="none"><path d="M2,4 Q50,12 98,3" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="1 7"/></svg>
+        </span>
         <svg class="logo-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12a7 7 0 1 0-14 0c0 4.42 7 12 7 12Z"/><circle cx="12" cy="9" r="2.3"/></svg>
       </a>
       <div class="foot-links">
@@ -502,6 +553,8 @@
   if (prefersReduced) {
     var motion = document.getElementById('carMotion');
     if (motion) motion.remove();
+    var heroMotion = document.getElementById('heroMotion');
+    if (heroMotion) heroMotion.remove();
   }
 
   (function(){
