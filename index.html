@@ -76,18 +76,20 @@
   .dark .btn-ghost{color:var(--dark-ink);border-color:#3a3b3f;}
   .btn-row{display:flex;gap:14px;flex-wrap:wrap;}
 
-  /* Logo / wordmark — the ONE place a display serif is used, matching the supplied brand mark */
-  .logo{display:inline-flex;align-items:flex-end;gap:4px;}
-  .logo-text{position:relative;display:inline-block;padding-bottom:7px;}
+  /* Logo / wordmark — the ONE place a display serif is used, matching the supplied brand mark.
+     The route line + pin are drawn as one motif hanging below/right of the wordmark (not inline
+     with it), sized in em units off .logo-mark's font-size so nav and footer scale together. */
+  .logo{display:inline-flex;align-items:center;}
+  .logo-mark{position:relative;display:inline-block;line-height:1;font-size:22px;}
   .logo-word{
     font-family:'Fraunces', Georgia, serif;font-weight:900;
-    font-size:22px;line-height:1;color:var(--accent);letter-spacing:-0.01em;
-    display:block;
+    font-size:1em;line-height:1;color:var(--accent);letter-spacing:-0.01em;
+    display:block;position:relative;z-index:1;
   }
-  .logo-underline{position:absolute;left:0;bottom:0;width:100%;height:9px;color:var(--accent-soft);overflow:visible;}
-  .logo-pin{width:14px;height:14px;flex:0 0 auto;color:var(--accent-soft);margin-bottom:6px;}
-  footer .logo-word{font-size:27px;color:var(--dark-ink);}
-  footer .logo-pin{width:17px;height:17px;color:var(--accent-soft);margin-bottom:7px;}
+  .logo-route{position:absolute;left:-0.5em;right:-0.14em;bottom:-0.42em;height:0.48em;color:var(--accent-soft);overflow:visible;pointer-events:none;}
+  .logo-pin{position:absolute;right:-0.36em;bottom:-0.5em;width:0.58em;height:0.58em;color:var(--accent-soft);pointer-events:none;}
+  footer .logo-mark{font-size:27px;}
+  footer .logo-word{color:var(--dark-ink);}
 
   /* Nav */
   header{
@@ -140,9 +142,9 @@
 
   .value-strip{max-width:820px;margin:32px auto 0;display:flex;flex-direction:column;gap:16px;}
   @media (min-width:700px){ .value-strip{flex-direction:row;justify-content:center;gap:0;} }
-  .value-item{display:flex;align-items:center;justify-content:center;gap:10px;font-size:14px;font-weight:600;color:var(--dark-ink);}
+  .value-item{display:flex;align-items:flex-start;justify-content:center;gap:10px;font-size:14px;font-weight:600;color:var(--dark-ink);text-align:left;}
   @media (min-width:700px){ .value-item{padding:0 30px;border-left:1px solid #2a2b2e;} .value-item:first-child{border-left:none;} }
-  .value-item svg{width:16px;height:16px;color:var(--accent-soft);flex:0 0 auto;}
+  .value-item svg{width:16px;height:16px;color:var(--accent-soft);flex:0 0 auto;margin-top:2px;}
 
   /* Demo badge */
   .demo-badge{
@@ -201,8 +203,11 @@
   @media (min-width:640px){ .pod-row{grid-template-columns:1fr 1fr 1fr auto;align-items:center;gap:10px;} }
   .pod-row .pod-po{font-weight:700;font-size:14px;}
   .pod-row .pod-meta{font-size:13px;color:var(--ink-soft);}
+  .pod-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
   .pod-check{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:#1f8a4c;}
   .pod-check svg{width:13px;height:13px;}
+  .pod-photo{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--ink-soft);}
+  .pod-photo svg{width:15px;height:15px;color:var(--accent);flex:0 0 auto;}
   .pod-empty{font-size:14px;color:var(--ink-soft);padding:20px 0;text-align:center;}
 
   /* Differentiator grid — plain, no card chrome */
@@ -243,11 +248,11 @@
 <header>
   <nav class="wrap">
     <a href="#top" class="logo">
-      <span class="logo-text">
+      <span class="logo-mark">
         <span class="logo-word">Routed</span>
-        <svg class="logo-underline" viewBox="0 0 100 12" preserveAspectRatio="none"><path d="M2,4 Q50,12 98,3" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="1 7"/></svg>
+        <svg class="logo-route" viewBox="0 0 100 20" preserveAspectRatio="none" aria-hidden="true"><path d="M2,8 C6,2 11,0 17,5 C34,17 63,19 98,16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="1 7"/></svg>
+        <svg class="logo-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 21s7-7.58 7-12a7 7 0 1 0-14 0c0 4.42 7 12 7 12Z"/><circle cx="12" cy="9" r="2.3"/></svg>
       </span>
-      <svg class="logo-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12a7 7 0 1 0-14 0c0 4.42 7 12 7 12Z"/><circle cx="12" cy="9" r="2.3"/></svg>
     </a>
     <div class="navlinks">
       <a href="#how-it-works">How It Works</a>
@@ -379,7 +384,7 @@
   <div class="wrap">
     <div class="section-head reveal">
       <div class="eyebrow">Proof of Delivery</div>
-      <h2>Every drop, logged and searchable.</h2>
+      <h2>Every delivery, logged and searchable.</h2>
       <p>Every drop is timestamped and logged the moment it's signed for. Look up any delivery by PO number or store — no more "did that ever arrive?" phone calls.</p>
     </div>
     <div class="reveal">
@@ -526,11 +531,11 @@
   <div class="wrap">
     <div class="foot-grid">
       <a href="#top" class="logo">
-        <span class="logo-text">
+        <span class="logo-mark">
           <span class="logo-word">Routed</span>
-          <svg class="logo-underline" viewBox="0 0 100 12" preserveAspectRatio="none"><path d="M2,4 Q50,12 98,3" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="1 7"/></svg>
+          <svg class="logo-route" viewBox="0 0 100 20" preserveAspectRatio="none" aria-hidden="true"><path d="M2,8 C6,2 11,0 17,5 C34,17 63,19 98,16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="1 7"/></svg>
+          <svg class="logo-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 21s7-7.58 7-12a7 7 0 1 0-14 0c0 4.42 7 12 7 12Z"/><circle cx="12" cy="9" r="2.3"/></svg>
         </span>
-        <svg class="logo-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-7.58 7-12a7 7 0 1 0-14 0c0 4.42 7 12 7 12Z"/><circle cx="12" cy="9" r="2.3"/></svg>
       </a>
       <div class="foot-links">
         <a href="#how-it-works">How It Works</a>
@@ -594,6 +599,7 @@
     {po:'PO-48231', store:'Auto Shop #118', time:'Aug 22, 2026 · 2:53 PM', signed:'D. Ferris'}
   ];
   var checkSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>';
+  var cameraSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-2h6l2 2h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/><circle cx="12" cy="13" r="3.4"/></svg>';
 
   function renderPod(rows){
     var el = document.getElementById('podResults');
@@ -606,7 +612,10 @@
         '<div class="pod-po">' + r.po + '</div>' +
         '<div class="pod-meta">' + r.store + '</div>' +
         '<div class="pod-meta">' + r.time + ' · Signed: ' + r.signed + '</div>' +
-        '<div class="pod-check">' + checkSvg + ' Delivered</div>' +
+        '<div class="pod-actions">' +
+          '<span class="pod-check">' + checkSvg + ' Delivered</span>' +
+          '<span class="pod-photo">' + cameraSvg + ' Photo on file</span>' +
+        '</div>' +
       '</div>';
     }).join('');
   }
