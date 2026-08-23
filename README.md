@@ -2,6 +2,9 @@
 
 Plain HTML/CSS/JS, single file (`index.html`), no build step, no dependencies (one Google Fonts link for the display typeface). One extra image file (`og-image.png`) supports link previews — see v14 below.
 
+## v18 tweak (2026-08-23, same day) — dropped the legal-entity name from the About copy
+The About section's opening sentence read "Routed (Tend To Solutions LLC) runs a dedicated delivery fleet..." — removed the parenthetical so it just reads "Routed runs a dedicated delivery fleet...". The footer's legal line ("© 2026 Tend To Solutions LLC, d/b/a Routed. Marietta, GA.") was left as-is since that's the correct place for the legal name, not the customer-facing About copy. Only `index.html` changed (one sentence).
+
 ## v17 — logo redrawn to match supplied mark, "drop" → "delivery" copy fix, mobile checkmark alignment, POD photo icon (2026-08-23, same day)
 - **Logo redrawn.** The route-line + pin were previously laid out as: a shallow curved underline sitting right at the text baseline, plus a small pin standing upright next to the last letter, roughly baseline-height. Per the newly supplied reference image, the correct mark has the dashed route line hanging further below the wordmark (not hugging the baseline), with a small upward curl at its left tail before it runs under the whole word, and the pin dangling off the bottom-right corner — its point resting near the line, its rounded head reaching back up toward the baseline. Rebuilt as a single motif: the wordmark stays real, selectable HTML text; the route line and pin are one absolutely-positioned SVG group sized in `em` units off the wordmark's own font-size, so the nav (22px) and footer (27px) versions scale together automatically instead of needing separate pixel overrides. Verified against the supplied reference image at both sizes.
 - **Proof of Delivery heading copy**: "Every drop, logged and searchable." → "Every delivery, logged and searchable."
