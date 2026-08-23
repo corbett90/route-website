@@ -1,6 +1,12 @@
 # Routed — Website
 
-Plain HTML/CSS/JS, single file (`index.html`), no build step, no dependencies (one Google Fonts link for the display typeface). One extra image file (`og-image.png`) supports link previews — see v10 below.
+Plain HTML/CSS/JS, single file (`index.html`), no build step, no dependencies (one Google Fonts link for the display typeface). One extra image file (`og-image.png`) supports link previews — see v12 below.
+
+## v12 tweak (2026-08-23, same day) — link-preview image now highlights the value props
+User asked for the preview image to show more of what makes Routed different, not just the headline. Added a 4-item row beneath the headline — Live tracking, every stop / Proof of delivery, every drop / Pricing built around accuracy / Dedicated vehicle, every route — using the exact same checkmark + hairline-divider pattern as the hero's value strip on the actual site, so the image reads as a direct extension of the real page rather than a separate marketing graphic. Kept the bold headline and the glowing route-line accent from v11, just repositioned the line into the top-right corner so it doesn't collide with the new row. Same 1200×630 size, same font caveat as before. Only `og-image.png` changed.
+
+## v11 tweak (2026-08-23, same day) — bolder link-preview image
+User confirmed the link-preview fix worked, but said the preview image itself ("og-image.png") was boring for a company positioned as disruptive. Replaced it with a punchier design: a much larger, bolder headline ("Never wonder where your parts are again.", with "parts" highlighted in brand blue) dominating the frame, plus a glowing animated-looking route line sweeping across the card with stop markers and a pulsing "live" endpoint dot — a static echo of the site's actual live-tracking visual, so it still reads as "delivery tech," not generic stock-photo energy. Same dark background and brand blue, same 1200×630 size, same font-rendering caveat as before (system serif approximation of Fraunces, not the exact face, since the generating environment has no live internet access to Google Fonts). No other files changed.
 
 ## v10 tweak (2026-08-23, same day) — link-preview (Open Graph) tags + preview image
 User noticed that texting routedparts.com showed a rough-looking preview title ("Routed --- Route-Based Parts & Freight Delivery"). The site previously had no Open Graph/Twitter Card tags at all, so link-preview generators (iMessage, WhatsApp, Slack, Facebook, LinkedIn, etc.) were falling back to guessing from the raw `<title>`/`<meta name="description">` tags — and some of those apps don't render the em dash (`—`) character cleanly, which is likely what turned into stray dashes.
