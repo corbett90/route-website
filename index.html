@@ -153,6 +153,83 @@
   }
   .demo-badge .dot{width:6px;height:6px;border-radius:50%;background:currentColor;}
 
+  /* Callout grid — Curri-style feature boxes: bordered cards, each with a small illustrated
+     "screenshot" panel (not just an icon), staggered reveal-in on scroll, and a hover lift/glow.
+     Sits right under the hero as an at-a-glance summary; the deeper illustrative sections
+     (tracking, proof, capabilities) still follow below. */
+  .callout-grid{display:grid;grid-template-columns:1fr;gap:20px;margin-top:8px;align-items:stretch;}
+  @media (min-width:640px){ .callout-grid{grid-template-columns:1fr 1fr;} }
+  @media (min-width:1000px){ .callout-grid{grid-template-columns:repeat(4,1fr);} }
+  .callout-card{
+    background:var(--bg-alt);border:1px solid rgba(var(--accent-soft-rgb),0.35);
+    border-radius:18px;text-align:left;overflow:hidden;
+    box-shadow:0 12px 30px -20px rgba(0,0,0,0.18);
+    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    display:flex;flex-direction:column;
+  }
+  .callout-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 26px 48px -20px rgba(37,99,235,0.3);
+    border-color:var(--accent);
+  }
+  .callout-body{padding:26px 24px 20px;}
+  .callout-card h3{font-size:17px;margin-bottom:8px;}
+  .callout-card p{font-size:14.5px;margin-bottom:0;}
+  /* staggered entrance so the four boxes settle in left-to-right rather than all at once */
+  .callout-grid .reveal:nth-child(1){transition-delay:0s;}
+  .callout-grid .reveal:nth-child(2){transition-delay:.09s;}
+  .callout-grid .reveal:nth-child(3){transition-delay:.18s;}
+  .callout-grid .reveal:nth-child(4){transition-delay:.27s;}
+
+  /* Callout graphics — small illustrative UI mockups filling the lower portion of each callout
+     card, the same "sample data" convention used by .dash-card/.pod-demo further down the page. */
+  .callout-graphic{
+    margin-top:auto;background:var(--bg);border-top:1px solid rgba(var(--accent-soft-rgb),0.3);
+    padding:18px;min-height:196px;display:flex;align-items:center;justify-content:center;
+    transition:background-color .25s ease;
+  }
+  .callout-card:hover .callout-graphic{background:rgba(var(--accent-soft-rgb),0.12);}
+
+  .g-doc, .g-vehicle, .g-pod{width:100%;background:var(--bg-alt);border:1px solid var(--line);border-radius:12px;padding:14px;}
+  .g-doc-head{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:10px;}
+  .g-doc-head .g-tag{color:#1f8a4c;background:rgba(31,138,76,0.12);padding:2px 8px;border-radius:999px;text-transform:none;letter-spacing:0;font-size:11px;flex:0 0 auto;}
+  .g-doc-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--line);}
+  .g-doc-row:first-of-type{border-top:none;padding-top:0;}
+  .g-doc-file{flex:0 0 auto;width:26px;height:30px;border-radius:4px;background:rgba(var(--accent-soft-rgb),0.2);display:flex;align-items:center;justify-content:center;}
+  .g-doc-file svg{width:13px;height:13px;color:var(--accent);}
+  .g-doc-name{font-size:12.5px;font-weight:700;color:var(--ink);line-height:1.3;}
+  .g-doc-meta{font-size:11px;color:var(--ink-soft);}
+  .g-doc-sign{margin-left:auto;font-size:11px;font-weight:600;color:#1f8a4c;display:flex;align-items:center;gap:4px;flex:0 0 auto;}
+  .g-doc-sign svg{width:12px;height:12px;}
+
+  .g-vehicle-label{font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:10px;}
+  .g-vehicle-row{display:flex;align-items:center;gap:12px;padding:10px;border:1.5px solid var(--accent);border-radius:10px;background:rgba(var(--accent-soft-rgb),0.1);}
+  .g-vehicle-icon{flex:0 0 auto;width:36px;height:36px;border-radius:9px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;}
+  .g-vehicle-icon svg{width:19px;height:19px;}
+  .g-vehicle-name{font-size:13px;font-weight:700;color:var(--ink);}
+  .g-vehicle-meta{font-size:11px;color:var(--ink-soft);}
+  .g-vehicle-check{margin-left:auto;color:var(--accent);flex:0 0 auto;}
+  .g-vehicle-check svg{width:16px;height:16px;}
+  .g-vehicle-note{margin-top:10px;font-size:11px;color:var(--ink-soft);line-height:1.4;}
+
+  .g-phone{width:124px;background:var(--dark);border-radius:20px;padding:8px;box-shadow:0 14px 30px -14px rgba(0,0,0,0.35);}
+  .g-phone-screen{background:linear-gradient(180deg, rgba(37,99,235,0.28), rgba(11,12,14,0) 55%), var(--dark);border-radius:13px;padding:12px 10px;min-height:154px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;}
+  .g-phone-dot{position:absolute;top:12px;right:12px;width:7px;height:7px;border-radius:50%;background:#2fd66b;}
+  .g-phone-dot::after{content:'';position:absolute;inset:-4px;border-radius:50%;background:#2fd66b;opacity:.4;animation:pulse 1.8s ease-out infinite;}
+  @media (prefers-reduced-motion:reduce){ .g-phone-dot::after{animation:none;} }
+  .g-phone-bubble{background:var(--bg-alt);border-radius:10px;padding:9px 10px;}
+  .g-phone-brand{font-size:8.5px;font-weight:800;letter-spacing:.08em;color:var(--accent);margin-bottom:3px;}
+  .g-phone-msg{font-size:10.5px;line-height:1.4;color:var(--ink);}
+
+  .g-pod-search{display:flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:7px 12px;margin-bottom:10px;}
+  .g-pod-search svg{width:13px;height:13px;color:var(--ink-soft);flex:0 0 auto;}
+  .g-pod-search span{font-size:11.5px;color:var(--ink-soft);}
+  .g-pod-mini-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-top:1px solid var(--line);}
+  .g-pod-mini-row:first-of-type{border-top:none;padding-top:0;}
+  .g-pod-po{font-size:12px;font-weight:700;color:var(--ink);}
+  .g-pod-check-mini{font-size:11px;font-weight:600;color:#1f8a4c;display:flex;align-items:center;gap:4px;}
+  .g-pod-check-mini svg{width:12px;height:12px;}
+
   /* Tracking dashboard card — functional UI, so it keeps card treatment */
   .dash-card{
     background:var(--bg-alt);border-radius:26px;padding:20px;
@@ -255,6 +332,7 @@
       </span>
     </a>
     <div class="navlinks">
+      <a href="#highlights">Why Routed</a>
       <a href="#how-it-works">How It Works</a>
       <a href="#capabilities">Capabilities</a>
       <a href="#about">About</a>
@@ -301,6 +379,85 @@
       <div class="value-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg><span>Fixed-route reliability, every run</span></div>
       <div class="value-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg><span>Full accountability on every drop</span></div>
       <div class="value-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg><span>Performance-based contracts, built around accuracy</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="highlights" class="alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Why Customers Choose Routed</div>
+      <h2>Everything you need, at a glance.</h2>
+      <p>No paperwork chasing, no guessing what's on the truck, no wondering if it arrived. Four things Routed handles for every route, every time.</p>
+    </div>
+    <div class="callout-grid">
+      <div class="callout-card reveal">
+        <div class="callout-body">
+          <h3>No Paperwork Headaches</h3>
+          <p>Every PO, BOL, and signature is captured digitally and logged automatically — no lost paperwork, no manual entry, no chasing down a signed slip.</p>
+        </div>
+        <div class="callout-graphic">
+          <div class="g-doc">
+            <div class="g-doc-head"><span>DEL-4824 · Proof of Delivery</span><span class="g-tag">Signed</span></div>
+            <div class="g-doc-row">
+              <div class="g-doc-file"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5"/></svg></div>
+              <div><div class="g-doc-name">PO-48220.pdf</div><div class="g-doc-meta">Purchase order · 2 pages</div></div>
+            </div>
+            <div class="g-doc-row">
+              <div class="g-doc-file"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5"/></svg></div>
+              <div><div class="g-doc-name">BOL-2214.pdf</div><div class="g-doc-meta">Bill of lading</div></div>
+              <div class="g-doc-sign"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Signed</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="callout-card reveal">
+        <div class="callout-body">
+          <h3>The Right Vehicle, Every Route</h3>
+          <p>A dedicated vehicle sized and scheduled for your route runs it every time, so you always know what will fit before you order.</p>
+        </div>
+        <div class="callout-graphic">
+          <div class="g-vehicle">
+            <div class="g-vehicle-label">Route 4 · Assigned Vehicle</div>
+            <div class="g-vehicle-row">
+              <div class="g-vehicle-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 16v-3.2a2 2 0 0 1 1.2-1.83l1.9-.82 1.6-3.05A2 2 0 0 1 9.47 6h5.06a2 2 0 0 1 1.77 1.1l1.6 3.05 1.9.82A2 2 0 0 1 21 12.8V16"/><path d="M3 16h18"/><path d="M6.5 10.15h11"/><circle cx="7.5" cy="16" r="1.8"/><circle cx="16.5" cy="16" r="1.8"/></svg></div>
+              <div><div class="g-vehicle-name">Sedan</div><div class="g-vehicle-meta">Small parts · trunk &amp; back seat</div></div>
+              <div class="g-vehicle-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div>
+            </div>
+            <div class="g-vehicle-note">Same dedicated vehicle, every run — no day-to-day swaps.</div>
+          </div>
+        </div>
+      </div>
+      <div class="callout-card reveal">
+        <div class="callout-body">
+          <h3>Live Tracking, Real Support</h3>
+          <p>Track your delivery in real time and reach a live person if a route needs attention — not just a status page.</p>
+        </div>
+        <div class="callout-graphic">
+          <div class="g-phone">
+            <div class="g-phone-screen">
+              <div class="g-phone-dot"></div>
+              <div class="g-phone-bubble">
+                <div class="g-phone-brand">ROUTED</div>
+                <div class="g-phone-msg">Your delivery is ~8 min out — Auto Shop #402.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="callout-card reveal">
+        <div class="callout-body">
+          <h3>Proof of Delivery, On Demand</h3>
+          <p>Every drop is timestamped, logged, and searchable by PO or store the moment it's signed for — no more "did that ever arrive?" calls.</p>
+        </div>
+        <div class="callout-graphic">
+          <div class="g-pod">
+            <div class="g-pod-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><span>Search by PO or store…</span></div>
+            <div class="g-pod-mini-row"><span class="g-pod-po">PO-48220</span><span class="g-pod-check-mini"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Delivered</span></div>
+            <div class="g-pod-mini-row"><span class="g-pod-po">PO-48231</span><span class="g-pod-check-mini"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Delivered</span></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -391,7 +548,7 @@
       <div class="demo-badge" style="margin-left:0;"><span class="dot"></span> Sample data — illustrative preview</div>
       <div class="pod-demo">
         <div class="pod-search">
-          <input type="text" id="podSearch" placeholder="Search by PO number or store name (try “402” or “48220”)" autocomplete="off">
+          <input type="text" id="podSearch" placeholder="Search by PO number or store name (try "402" or "48220")" autocomplete="off">
           <button class="btn btn-primary" style="padding:12px 22px;" onclick="filterPod()">Search</button>
         </div>
         <div class="pod-results" id="podResults"></div>
@@ -538,6 +695,7 @@
         </span>
       </a>
       <div class="foot-links">
+        <a href="#highlights">Why Routed</a>
         <a href="#how-it-works">How It Works</a>
         <a href="#capabilities">Capabilities</a>
         <a href="#about">About</a>
@@ -545,7 +703,7 @@
       </div>
     </div>
     <div class="foot-bottom">
-      <span>© <span id="year"></span> Tend To Solutions LLC, d/b/a Routed. Marietta, GA.</span>
+      <span>© <span id="year"></span> Routed. Marietta, GA.</span>
       <span>hello@routedparts.com</span>
     </div>
   </div>
