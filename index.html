@@ -104,6 +104,10 @@
   @media (min-width:820px){ .navlinks{display:flex;} }
   .navlinks a:hover{color:var(--ink);}
   .nav-cta{font-size:13px;font-weight:600;padding:8px 18px;border-radius:999px;background:var(--ink);color:#fff;}
+  .nav-actions{display:flex;align-items:center;gap:8px;}
+  .nav-portal{font-size:12px;font-weight:600;padding:7px 14px;border-radius:999px;border:1.5px solid rgba(0,0,0,0.14);color:var(--ink);white-space:nowrap;transition:background .15s,border-color .15s;}
+  .nav-portal:hover{background:rgba(0,0,0,0.05);border-color:rgba(0,0,0,0.22);}
+  @media (max-width:399px){ .nav-portal{padding:7px 10px;} }
 
   /* Dark sections */
   .dark{background:var(--dark);color:var(--dark-ink);}
@@ -338,7 +342,10 @@
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </div>
-    <a href="#contact" class="nav-cta">Request a Quote</a>
+    <div class="nav-actions">
+      <a href="https://routed-ops.vercel.app/portal/login" class="nav-portal">Customer Portal</a>
+      <a href="#contact" class="nav-cta">Request a Quote</a>
+    </div>
   </nav>
 </header>
 
@@ -700,6 +707,7 @@
         <a href="#capabilities">Capabilities</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
+        <a href="https://routed-ops.vercel.app/portal/login">Customer Portal</a>
       </div>
     </div>
     <div class="foot-bottom">
