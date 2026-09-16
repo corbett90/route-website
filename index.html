@@ -137,8 +137,16 @@
 
   /* Hero — kept compact so the CTA and value strip land above the fold on typical laptop viewports */
   .hero{padding-top:76px;padding-bottom:56px;text-align:center;position:relative;overflow:hidden;}
-  .hero-bg{position:absolute;inset:0;z-index:0;pointer-events:none;}
-  .hero-bg svg{width:100%;height:100%;display:block;}
+  .hero-bg{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:var(--dark);}
+  .hero-bg video{width:100%;height:100%;object-fit:cover;display:block;}
+  /* Dark gradient + flat tint over the background video so the white hero text stays readable
+     at any point in the loop, regardless of how bright a given frame is. */
+  .hero-bg::after{
+    content:"";position:absolute;inset:0;
+    background:
+      linear-gradient(180deg, rgba(10,12,16,0.55) 0%, rgba(10,12,16,0.72) 55%, rgba(10,12,16,0.85) 100%),
+      radial-gradient(65% 65% at 80% 6%, rgba(37,99,235,0.35) 0%, rgba(37,99,235,0) 70%);
+  }
   .hero .wrap{position:relative;z-index:1;}
   .hero h1{font-size:clamp(30px,4.6vw,50px);max-width:760px;margin-left:auto;margin-right:auto;}
   .hero p.lead{font-size:17px;max-width:580px;margin:0 auto 24px;color:var(--dark-ink-soft);}
@@ -351,29 +359,9 @@
 
 <section id="top" class="dark hero">
   <div class="hero-bg" aria-hidden="true">
-    <svg viewBox="0 0 1440 800" preserveAspectRatio="xMidYMin slice" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="heroGlow" cx="80%" cy="6%" r="65%">
-          <stop offset="0%" stop-color="#2563eb" stop-opacity="0.35"/>
-          <stop offset="70%" stop-color="#2563eb" stop-opacity="0"/>
-        </radialGradient>
-        <filter id="heroDotGlow" x="-60%" y="-60%" width="220%" height="220%">
-          <feGaussianBlur stdDeviation="4" result="b"/>
-          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-      </defs>
-      <rect width="1440" height="800" fill="url(#heroGlow)"/>
-      <path d="M -100,70 C 280,150 560,10 860,90 S 1300,20 1580,80"
-        fill="none" stroke="#90c9f4" stroke-width="2.5" stroke-dasharray="1 12" stroke-linecap="round" opacity="0.45"/>
-      <circle cx="280" cy="150" r="4" fill="#90c9f4" opacity="0.5"/>
-      <circle cx="860" cy="90" r="4" fill="#90c9f4" opacity="0.5"/>
-      <g filter="url(#heroDotGlow)">
-        <circle r="5" fill="#90c9f4">
-          <animateMotion id="heroMotion" dur="16s" repeatCount="indefinite"
-            path="M -100,70 C 280,150 560,10 860,90 S 1300,20 1580,80"/>
-        </circle>
-      </g>
-    </svg>
+    <video autoplay muted loop playsinline preload="auto" poster="routed-hero-poster.jpg">
+      <source src="routed-hero.mp4" type="video/mp4">
+    </video>
   </div>
   <div class="wrap">
     <h1 class="reveal">Never wonder where your parts are again.</h1>
